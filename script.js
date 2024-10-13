@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const retakeButton = document.getElementById("retakeButton");
     const styleName = document.getElementById("styleName");
     const barChart = document.getElementById("barChart");
+    const progressBar = document.getElementById("quizProgressBar");
 
     let currentQuestionIndex = 0;
     let answers = [];
@@ -76,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         introScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         renderQuestion();
+        updateProgressBar();
     });
 
     // Handle 'Next' and 'Previous' buttons
@@ -87,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 currentQuestionIndex++;
                 renderQuestion();
+                updateProgressBar();
             }
         } else {
             alert("Please select an option before proceeding.");
@@ -96,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     prevButton.addEventListener("click", () => {
         currentQuestionIndex--;
         renderQuestion();
+        updateProgressBar();
     });
 
     // Render the current question and options
@@ -119,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Disable or enable navigation buttons
         prevButton.disabled = currentQuestionIndex === 0;
         nextButton.textContent = currentQuestionIndex === questions.length - 1 ? "Submit" : "Next";
+    }
+
+    // Update the progress bar based on the current question index
+    function updateProgressBar() {
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        progressBar.value = progress; // Set the progress bar value (0 to 100)
     }
 
     // Save the selected answer
@@ -202,5 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
         resultScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         renderQuestion();
+        updateProgressBar();
     });
 });
