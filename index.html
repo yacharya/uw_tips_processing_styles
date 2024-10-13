@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processing Styles Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include a viewport meta tag for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Introduction Screen -->
+    <div id="introScreen" class="container">
+        <div class="logo-container">
+            <img src="uw-tips.png" alt="App Logo" id="logo">
+        </div>
+        <h1>Welcome to the Processing Styles Test</h1>
+        <p>Directions: Choose the letter before the statement that best describes you.</p>
+        <button id="beginButton">Begin Test</button>
+    </div>
+
+    <!-- Quiz Container -->
+    <div id="quizContainer" class="container hidden">
+        <div class="logo-container">
+            <!-- Replace 'logo.png' with the path to your logo image -->
+            <img src="uw-tips.png" alt="App Logo" id="logo">
+        </div>
+        <h1>Processing Styles Test</h1>
+        <!-- The question cards will be dynamically inserted here -->
+        <div id="questionCard"></div>
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button id="prevButton" disabled>Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="result" class="container hidden">
+        <div class="logo-container">
+            <!-- Replace 'logo.png' with the path to your logo image -->
+            <img src="uw-tips.png" alt="App Logo" id="logo">
+        </div>
+        <h2>Your Result</h2>
+        <canvas id="barChart" width="400" height="300"></canvas>
+        <h3>Your Processing Style: <p id="styleName"></p></h3>
+        <button id="emailResultsButton" onclick="alert('Feature not functional yet');">Email Results</button>
+        <!--
+        <div id="styleDescriptions" class="hidden">
+            <h3>Style Descriptions:</h3>
+            <p id="predominantStyleDescription"></p>
+            <p id="backupStyleDescription"></p>
+        </div>
+        -->
+        <button id="retakeButton">Retake Test</button>
+        <footer>
+            <p>Adapted from - Learning to Study Through Critical Thinking, <i>J.A. Beatrice</i></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

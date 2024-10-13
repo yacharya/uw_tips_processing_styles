@@ -1,0 +1,264 @@
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Theme colors */
+:root {
+    --primary-color: #6a0dad; /* Purple */
+    --secondary-color: #ffffff; /* White */
+    --background-color: #f3e5f5; /* Light Purple Hue */
+    --text-color: #1e1e1e; /* Dark Text */
+    --button-color: #6a0dad; /* Purple */
+    --button-hover-color: #7b1fa2; /* Darker Purple */
+    --disabled-button-color: #c0c0c0; /* Grey */
+    --accent-color: #e8eaf6; /* Very Light Purple */
+    --link-color: #0000ff; /* Blue */
+}
+
+/* Body styling */
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styling */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#logo {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+}
+
+/* Header styling */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+/* Introduction Screen */
+#introScreen p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#beginButton {
+    display: block;
+    margin: 0 auto;
+    background-color: var(--button-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#beginButton:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* Question card */
+.card {
+    margin-bottom: 20px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+/* Option labels */
+label {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+label:hover {
+    background-color: #d0d0d0;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    background-color: var(--button-color);
+    color: var(--secondary-color);
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: var(--button-color);
+    color: var(--secondary-color);
+    font-family: 'Poppins';
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+}
+
+button:disabled {
+    background-color: var(--disabled-button-color);
+    cursor: not-allowed;
+}
+
+#nextButton {
+    margin-left: auto;
+}
+
+#prevButton {
+    margin-right: auto;
+}
+
+/* Result section */
+#result {
+    text-align: center;
+}
+
+#styleName, #backupStyleName {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+}
+
+#barChart {
+    margin: 20px auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    background-color: var(--background-color);
+    border-radius: 8px;
+}
+
+/* Style Descriptions */
+#styleDescriptions {
+    margin-top: 20px;
+    text-align: left;
+    transition: max-height 0.3s ease; /* for helping transition */
+    overflow: hidden;
+}
+
+#styleDescriptions p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+#styleDescriptions.hidden {
+    max-height: 0;
+}
+
+/* Hidden elements */
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+footer p {
+    margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2, h3 {
+        font-size: 20px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #prevButton {
+        margin-right: 0;
+    }
+
+    #nextButton {
+        margin-left: 0;
+    }
+
+    #logo {
+        max-width: 100px;
+    }
+}
