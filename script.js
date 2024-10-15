@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextButton = document.getElementById("nextButton");
     const prevButton = document.getElementById("prevButton");
     const retakeButton = document.getElementById("retakeButton");
-    const styleName = document.getElementById("styleName");
+    //const styleName = document.getElementById("styleName");
     const barChart = document.getElementById("barChart");
     const progressBar = document.getElementById("quizProgressBar");
 
@@ -155,16 +155,23 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (answer === 'c') cCount++;
         });
 
+        /*
         // Determine the predominant style
         const predominantStyle = getPredominantStyle(aCount, bCount, cCount);
         styleName.textContent = predominantStyle;
+        */
 
         // Show the result section and hide the quiz container
         quizContainer.classList.add("hidden");
         resultScreen.classList.remove("hidden");
 
+        /*
         // Draw the icon in the barChart canvas
         drawIcon(predominantStyle);
+        */
+
+        // Draw the bar chart comparing Visual, Auditory, and Tactile counts
+        drawBarChart(aCount, bCount, cCount);
     }
 
     function getPredominantStyle(aCount, bCount, cCount) {
@@ -172,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
     }
 
+    /*
     // Draw the icon in the canvas based on the predominant style
     function drawIcon(style) {
         const ctx = barChart.getContext("2d");
@@ -203,6 +211,84 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error(`Failed to load image: ${img.src}`);
         alert(`Error: Could not load image for ${style} processing style.`);
     };
+    }
+    */
+
+    //Draw bar chart function.
+    function drawBarChart(aCount, bCount, cCount) {
+        const canvas = document.getElementById('barChart');
+        const ctx = canvas.getContext('2d');
+    
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        const labels = ['Visual', 'Auditory', 'Tactile'];
+        const data = [aCount, bCount, cCount];
+        const colors = ['#e74c3c', '#9b59b6', '#3498db']; // Colors for the bars
+    
+        // Find the maximum score for scaling
+        const maxScore = Math.max(...data);
+    
+        // Bar chart settings
+        const barWidth = 60; // Width of each bar
+        const gap = 50; // Gap between bars
+        const chartHeight = canvas.height - 100; // Leave space for the legends at the bottom
+        const yAxisMargin = 50; // Margin for the Y-axis
+    
+        // Calculate the total width of the bar chart
+        const chartWidth = labels.length * barWidth + (labels.length - 1) * gap;
+    
+        // Calculate the starting X position to center the bars
+        const startX = (canvas.width - chartWidth) / 2;// + yAxisMargin; // Adjust for Y-axis margin
+    
+        // Scaling factor
+        const scale = chartHeight / (maxScore * 1.2); // Add extra space for scale
+    
+        // Draw axes
+        ctx.beginPath();
+        ctx.moveTo(yAxisMargin, canvas.height - 50); // X-axis start
+        ctx.lineTo(canvas.width - 20, canvas.height - 50); // X-axis end
+        ctx.moveTo(yAxisMargin, canvas.height - 50); // Y-axis start
+        ctx.lineTo(yAxisMargin, 20); // Y-axis end
+        ctx.strokeStyle = '#000'; // Axis color
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    
+        // Draw Y-axis labels and horizontal grid lines
+        ctx.fillStyle = '#000';
+        ctx.font = '12px Poppins';
+        const numYLabels = 5; // Number of labels on Y-axis
+        for (let i = 0; i <= numYLabels; i++) {
+            const yValue = (maxScore / numYLabels) * i;
+            const yPosition = canvas.height - 50 - (chartHeight / numYLabels) * i; // Y position for label
+    
+            // Draw Y-axis label
+            ctx.fillText(yValue.toFixed(0), yAxisMargin - 30, yPosition + 5); // Draw Y-axis label
+    
+            // Draw horizontal grid lines
+            ctx.beginPath();
+            ctx.moveTo(yAxisMargin, yPosition); // Start line
+            ctx.lineTo(canvas.width - 20, yPosition); // End line
+            ctx.strokeStyle = 'rgba(200, 200, 200, 0.5)'; // Light gray color for grid lines
+            ctx.lineWidth = 1; // Line width for grid
+            ctx.stroke();
+        }
+    
+        // Draw bars (centered in the canvas)
+        data.forEach((score, index) => {
+            const barHeight = score * scale;
+            const x = startX + index * (barWidth + gap); // Adjusted X position to center the bars
+            const y = canvas.height - 50 - barHeight; // Adjusted Y position to leave space for legends
+    
+            // Draw the bar
+            ctx.fillStyle = colors[index];
+            ctx.fillRect(x, y, barWidth, barHeight);
+    
+            // Draw X-axis labels below the bars
+            const xLabelX = x + (barWidth / 2) - (ctx.measureText(labels[index]).width / 2); // Center the label under the bar
+            ctx.fillStyle = '#000'; // Set color for X-axis labels
+            ctx.fillText(labels[index], xLabelX, canvas.height - 30); // Draw X-axis label
+        });
     }
 
     // Retake the test
